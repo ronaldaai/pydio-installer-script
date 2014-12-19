@@ -39,6 +39,8 @@ repo_key="charles@ajaxplorer.info.gpg.key"
 pydio_apache_conf="/usr/share/doc/pydio/apache2.sample.conf"
 apache_site_conf="/etc/apache2/sites-enabled/pydio.conf"
 apt_path="/etc/apt/sources.list"
+pydio_instdir="/usr/share/pydio"
+pydio_confdir="/usr/share/pydio/conf"
 
 echo $HEAD4
 echo $HEAD1
@@ -258,8 +260,8 @@ service apache2 reload
 
 #Cleaning up
 echo -n $STR20
-chmod -R 777 /usr/share/pydio
-chmod -R 777 /usr/share/pydio/conf
+x=`chmod -R 777 "$pydio_instdir"`
+x=`chmod -R 777 "$pydio_confdir"`
 cd ~/
 rm "$tmp_file"
 rm "$repo_key"
