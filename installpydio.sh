@@ -24,8 +24,9 @@ STR15="[+] Enabling MCrypt in PHP5 ... "
 STR16="[+] Installing Sqlite3 ... "
 STR17="[+] Disabling PHP Output Buffer ..."
 STR18="[+] Setting Server Locale for pydio ..."
-STR19="[+] Cleaning up ..."
-STR20="[*] All done. Reboot for changes."
+STR19="[+] Setting up SSL Certificates (*Interaction needed) ..."
+STR20="[+] Cleaning up ..."
+STR21="[*] All done. Reboot for changes."
 tmp_file="installpydio.tmp"
 php_ini="/etc/php5/apache2/php.ini"
 bootstrap_url="/etc/pydio/bootstrap_conf.php"
@@ -244,14 +245,24 @@ case "$x" in
 	;;
 esac
 
-#Cleaning up
+#Settings up SSL
 echo -n $STR19
+mkdir /etc/apache2/ssl
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+a2enmod ssl
+a2ensite default-ssl
+service apache2 reload
+
+#Cleaning up
+echo -n $STR20
+chmod -R 777 /usr/share/pydio
+cd ~/
 rm "$tmp_file"
 rm "$repo_key"
 echo $STR7
 
 #All Done
-echo $STR20
+echo $STR21
 #sleep 3
 #sudo reboot
 
