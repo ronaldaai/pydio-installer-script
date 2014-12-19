@@ -24,7 +24,8 @@ STR15="[+] Enabling MCrypt in PHP5 ... "
 STR16="[+] Installing Sqlite3 ... "
 STR17="[+] Disabling PHP Output Buffer ..."
 STR18="[+] Setting Server Locale for pydio ..."
-STR19="[*] All done. Reboot for changes."
+STR19="[+] Cleaning up ..."
+STR20="[*] All done. Reboot for changes."
 tmp_file="installpydio.tmp"
 php_ini="/etc/php5/apache2/php.ini"
 bootstrap_url="/etc/pydio/bootstrap_conf.php"
@@ -168,7 +169,7 @@ fi
 
 #enable mcrypt mod in php5
 echo -n $STR14
-x=`cd /etc/php5/mods-available`
+cd /etc/php5/mods-available
 case "$x" in
 	*"No such file or directory"*)
 		echo $STR8
@@ -243,8 +244,14 @@ case "$x" in
 	;;
 esac
 
+#Cleaning up
+echo -n $STR19
+rm "$tmp_file"
+rm "$repo_key"
+echo $STR7
+
 #All Done
-echo $STR19
+echo $STR20
 #sleep 3
 #sudo reboot
 
