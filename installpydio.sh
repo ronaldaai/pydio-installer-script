@@ -258,8 +258,8 @@ service apache2 reload
 
 #Cleaning up
 echo -n $STR20
-chmod 777 /usr/share/pydio
-chmod 777 /usr/share/pydio/conf
+chmod -R 777 /usr/share/pydio
+chmod -R 777 /usr/share/pydio/conf
 cd ~/
 rm "$tmp_file"
 rm "$repo_key"
