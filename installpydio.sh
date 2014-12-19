@@ -229,6 +229,9 @@ esac
 #changing PHP Output buffering
 echo -n $STR17
 x=`sed -i 's/output_buffering = 4096/output_buffering = Off/g' "$php_ini"`
+x=`sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 1G/g' "$php_ini"`
+x=`sed -i 's/max_file_uploads = 20/max_file_uploads = 20000/g' "$php_ini"`
+x=`sed -i 's/post_max_size = 8M/post_max_size = 1G/g' "$php_ini"`
 echo $STR7
 
 #adding server locale
